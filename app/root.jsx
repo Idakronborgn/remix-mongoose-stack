@@ -36,8 +36,8 @@ export default function App() {
           <Link to="/" className="hover:underline text-blue-600">
             Home
           </Link>
-          <Link to="/books/new" className="ml-3 hover:underline text-blue-600">
-            New book
+          <Link to="/profiles/new" className="ml-3 hover:underline text-blue-600">
+            New profile
           </Link>
         </header>
         <Outlet />

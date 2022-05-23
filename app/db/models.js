@@ -2,9 +2,24 @@ import { mongoose } from "mongoose";
 
 const { Schema } = mongoose;
 
-const bookSchema = new Schema(
+const profileSchema = new Schema(
   {
+    // img: {
+    //   type: String,
+    //   required: true,
+    //   minLength: [3, "That's too short"],
+    // },
     title: {
+      type: String,
+      required: true,
+      minLength: [3, "That's too short"],
+    },
+    bio: {
+      type: String,
+      required: true,
+      minLength: [3, "That's too short"],
+    },
+    hashtags: {
       type: String,
       required: true,
       minLength: [3, "That's too short"],
@@ -15,8 +30,8 @@ const bookSchema = new Schema(
 
 export const models = [
   {
-    name: "Book",
-    schema: bookSchema,
-    collection: "books",
+    name: "Profile",
+    schema: profileSchema,
+    collection: "profiles",
   },
 ];

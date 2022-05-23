@@ -6,8 +6,14 @@ export async function action({ request }) {
   const form = await request.formData();
   const db = await connectDb();
   try {
-    const newBook = await db.models.Book.create({ title: form.get("title") });
-    return redirect(`/books/${newBook._id}`);
+    const newProfile = await db.models.Profile.create({ 
+      // img: form.get("img"),
+      title: form.get("title"),
+      bio: form.get("bio"),
+      hashtags: form.get("hashtags"),
+
+     });
+    return redirect(`/profiles/${newProfile._id}`);
   } catch (error) {
     return json(
       { errors: error.errors, values: Object.fromEntries(form) },
@@ -16,12 +22,13 @@ export async function action({ request }) {
   }
 }
 
-export default function CreateBook() {
+export default function CreateProfile() {
   const actionData = useActionData();
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Create book</h1>
+      <h1 className="text-2xl font-bold mb-4">Create profile</h1>
       <Form method="post">
+     
         <label htmlFor="title" className="block font-semibold mb-1">
           Title:
         </label>
@@ -33,6 +40,34 @@ export default function CreateBook() {
           defaultValue={actionData?.values.title}
           className={
             actionData?.errors.title ? "border-2 border-red-500" : null
+          }
+        />
+
+<label htmlFor="bio" className="block font-semibold mb-1">
+          Bio text:
+        </label>
+        <textarea
+          type="text"
+          name="bio"
+          id="bio"
+          placeholder="Type your bio here"
+          defaultValue={actionData?.values.bio}
+          className={
+            actionData?.errors.bio ? "border-2 border-red-500" : null
+          }
+        />
+
+<label htmlFor="hashtags" className="block font-semibold mb-1">
+          Hashtags:
+        </label>
+        <input
+          type="text"
+          name="hashtags"
+          id="hashtags"
+          placeholder="Give yourself a hashtag"
+          defaultValue={actionData?.values.hashtags}
+          className={
+            actionData?.errors.hashtags ? "border-2 border-red-500" : null
           }
         />
         {actionData?.errors.title && (

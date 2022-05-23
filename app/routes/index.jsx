@@ -3,27 +3,27 @@ import connectDb from "~/db/connectDb.server.js";
 
 export async function loader() {
   const db = await connectDb();
-  const books = await db.models.Book.find();
-  return books;
+  const profiles = await db.models.Profile.find();
+  return profiles;
 }
 
 export default function Index() {
-  const books = useLoaderData();
+  const profiles = useLoaderData();
 
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Remix + Mongoose</h1>
       <h2 className="text-lg font-bold mb-3">
-        Here are a few of my favorite books:
+        Here are a few of my favorite profiles:
       </h2>
       <ul className="ml-5 list-disc">
-        {books.map((book) => {
+        {profiles.map((profile) => {
           return (
-            <li key={book._id}>
+            <li key={profile._id}>
               <Link
-                to={`/books/${book._id}`}
+                to={`/profiles/${profile._id}`}
                 className="text-blue-600 hover:underline">
-                {book.title}
+                {profile.title}
               </Link>
             </li>
           );
